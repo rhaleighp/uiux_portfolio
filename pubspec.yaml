@@ -23,3 +23,20 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  # Make sure these folders & files exist and the names match exactly.
+  assets:
+    - assets/certs/
+    # or, if you prefer to be explicit instead of using the whole folder:
+    # - assets/resforce_ui.png
+    # - assets/epass_ui.png
+    # - assets/stockup_ui.png
+    # - assets/pawcentral_ui.png
+    # - assets/design_dashboard.png
+    # - assets/design_onboarding.png
+    # - assets/design_landing.png
+    # - assets/design_poster.png
+    # - assets/certs/it_specialist_html_css.png
+    # - assets/certs/ccna_intro_networks.png
+    # - assets/certs/unesco_hackathon_delegate.png
+    # - assets/certs/nextgenph_delegate.png
