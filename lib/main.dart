@@ -997,7 +997,16 @@ class _ProjectsSection extends StatelessWidget {
         role: 'Front-end / UI/UX Designer',
         timeframe: '2024 • Capstone system',
         caseStudyUrl: 'https://resforce.info',
-        imageAsset: 'assets/resforce_ui.png',
+        gallery: [
+          'assets/resforce/resforce_1.png',
+          'assets/resforce/resforce_2.png',
+          'assets/resforce/resforce_3.png',
+          'assets/resforce/resforce_4.png',
+          'assets/resforce/resforce_5.png',
+          'assets/resforce/resforce_6.png',
+          'assets/resforce/resforce_7.png',
+          'assets/resforce/resforce_8.png',
+        ],
       ),
       const ProjectCardData(
         title:
@@ -1008,7 +1017,10 @@ class _ProjectsSection extends StatelessWidget {
         role: 'UI/UX Designer • Front-end Support',
         timeframe: '2024 • Academic project',
         caseStudyUrl: 'https://example.com/epass',
-        imageAsset: 'assets/epass_ui.png',
+        gallery: [
+          'assets/epass/epass_1.png',
+          'assets/epass/epass_2.png',
+        ],
       ),
       const ProjectCardData(
         title: 'StockUp – Inventory Management System',
@@ -1018,7 +1030,9 @@ class _ProjectsSection extends StatelessWidget {
         role: 'UI/UX Designer',
         timeframe: '2023 • Academic prototype',
         caseStudyUrl: null,
-        imageAsset: 'assets/stockup_ui.png',
+        gallery: [
+          'assets/stockup/stockup_1.png',
+        ],
       ),
       const ProjectCardData(
         title: 'PawCentral PH: Pet Care Management Platform',
@@ -1028,7 +1042,46 @@ class _ProjectsSection extends StatelessWidget {
         role: 'Product / UI/UX Designer',
         timeframe: '2024 • Personal project',
         caseStudyUrl: null,
-        imageAsset: 'assets/pawcentral_ui.png',
+        gallery: [
+          'assets/pawcentral/pawcentral_1.png',
+          'assets/pawcentral/pawcentral_2.png',
+        ],
+      ),
+      const ProjectCardData(
+        title: 'Matharlika',
+        description:
+            'A concept math learning experience with playful UI, progress tracking, and problem sets for students.',
+        tags: ['Mobile app', 'Learning', 'Concept'],
+        role: 'Product / UI/UX Designer',
+        timeframe: '2024 • Personal project',
+        caseStudyUrl: null,
+        gallery: [
+          'assets/matharlika/matharlika_1.png',
+        ],
+      ),
+      const ProjectCardData(
+        title: 'PizzaMe',
+        description:
+            'Food ordering app concept with simple navigation, product cards, and cart flow for small local businesses.',
+        tags: ['Mobile app', 'E-commerce', 'Concept'],
+        role: 'Product / UI/UX Designer',
+        timeframe: '2024 • Personal project',
+        caseStudyUrl: null,
+        gallery: [
+          'assets/pizzame/pizzame_1.png',
+        ],
+      ),
+      const ProjectCardData(
+        title: 'NinjaHands',
+        description:
+            'A playful productivity concept focusing on quick actions, shortcuts, and animated interactions.',
+        tags: ['Mobile app', 'UX Flows', 'Concept'],
+        role: 'Product / UI/UX Designer',
+        timeframe: '2024 • Personal project',
+        caseStudyUrl: null,
+        gallery: [
+          'assets/ninjahands/ninjahands_1.png',
+        ],
       ),
     ];
 
@@ -1084,7 +1137,7 @@ class ProjectCardData {
   final String? role;
   final String? timeframe;
   final String? caseStudyUrl;
-  final String? imageAsset;
+  final List<String> gallery;
 
   const ProjectCardData({
     required this.title,
@@ -1093,7 +1146,7 @@ class ProjectCardData {
     this.role,
     this.timeframe,
     this.caseStudyUrl,
-    this.imageAsset,
+    this.gallery = const [],
   });
 }
 
@@ -1105,7 +1158,7 @@ class _ProjectCardInteractive extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: () => _showProjectDialog(context, data),
+      onTap: () => _showProjectGalleryDialog(context, data),
       child: ProjectCard(data: data),
     );
   }
@@ -1117,6 +1170,7 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 🔁 Card has NO thumbnail now – text-only on the list.
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -1127,18 +1181,6 @@ class ProjectCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (data.imageAsset != null) ...[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Image.asset(
-                data.imageAsset!,
-                height: 160,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: 10),
-          ],
           Text(
             data.title,
             style: GoogleFonts.nunito(
@@ -1175,100 +1217,160 @@ class ProjectCard extends StatelessWidget {
   }
 }
 
-void _showProjectDialog(BuildContext context, ProjectCardData data) {
+/* ───────────── PROJECT GALLERY DIALOG (CLICK CARD → IMAGES ONLY) ───────────── */
+
+void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
+  if (data.gallery.isEmpty) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: kParchment,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                data.title,
+                style: GoogleFonts.nunito(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: kDeepGreen,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Screenshots coming soon.',
+                style: GoogleFonts.nunito(
+                  fontSize: 13,
+                  color: kText.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Close'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
   showDialog(
     context: context,
     builder: (context) {
-      return Dialog(
-        backgroundColor: kParchment,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 650),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    data.title,
-                    style: GoogleFonts.nunito(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                      color: kDeepGreen,
+      int currentIndex = 0;
+
+      return StatefulBuilder(
+        builder: (context, setState) {
+          final total = data.gallery.length;
+
+          return Dialog(
+            backgroundColor: kParchment,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 780,
+                maxHeight: 620,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Title + close
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            data.title,
+                            style: GoogleFonts.nunito(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: kDeepGreen,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close, color: kText),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
                     ),
-                  ),
-                  if (data.role != null || data.timeframe != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      [
-                        if (data.role != null) data.role!,
-                        if (data.timeframe != null) data.timeframe!,
-                      ].join(' • '),
-                      style: GoogleFonts.nunito(
-                        fontSize: 12,
-                        color: kText.withOpacity(0.7),
+                    const SizedBox(height: 8),
+                    // Image viewer
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(18),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.05),
+                          child: Center(
+                            child: Image.asset(
+                              data.gallery[currentIndex],
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
                       ),
+                    ),
+                    const SizedBox(height: 12),
+                    // Pagination + controls
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${currentIndex + 1} of $total',
+                          style: GoogleFonts.nunito(
+                            fontSize: 12,
+                            color: kText.withOpacity(0.7),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            TextButton.icon(
+                              onPressed: currentIndex > 0
+                                  ? () {
+                                      setState(() {
+                                        currentIndex--;
+                                      });
+                                    }
+                                  : null,
+                              icon: const Icon(Icons.chevron_left),
+                              label: const Text('Previous'),
+                            ),
+                            const SizedBox(width: 8),
+                            TextButton.icon(
+                              onPressed: currentIndex < total - 1
+                                  ? () {
+                                      setState(() {
+                                        currentIndex++;
+                                      });
+                                    }
+                                  : null,
+                              icon: const Icon(Icons.chevron_right),
+                              label: const Text('Next'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
-                  const SizedBox(height: 14),
-                  Text(
-                    data.description,
-                    style: GoogleFonts.nunito(
-                      fontSize: 13,
-                      height: 1.7,
-                      color: kText,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 4,
-                    children: data.tags
-                        .map(
-                          (t) => Chip(
-                            label: Text(
-                              t,
-                              style: const TextStyle(fontSize: 11),
-                            ),
-                            backgroundColor: kSoftGreen,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  const SizedBox(height: 18),
-                  Text(
-                    'Use this space to write your full case study: problem, research, flows, wireframes, and outcomes.\n'
-                    'You can also link to a Figma prototype or Behance/Dribbble case study below.',
-                    style: GoogleFonts.nunito(
-                      fontSize: 12,
-                      height: 1.6,
-                      color: kText.withOpacity(0.8),
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  if (data.caseStudyUrl != null)
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        // TODO: open link with url_launcher
-                      },
-                      icon: const Icon(Icons.open_in_new),
-                      label: const Text('Open full case study'),
-                    )
-                  else
-                    Text(
-                      'Tip: attach your real case study link here (Figma, Behance, Notion, etc.).',
-                      style: GoogleFonts.nunito(
-                        fontSize: 11,
-                        color: kText.withOpacity(0.7),
-                      ),
-                    ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
     },
   );
@@ -1505,7 +1607,7 @@ class _CertificationItem {
   final String issuer;
   final String year;
   final String details;
-  final String? imageAsset; // 👈 new
+  final String? imageAsset;
 
   _CertificationItem({
     required this.title,
@@ -1644,7 +1746,6 @@ void _showCertificationDialog(BuildContext context, _CertificationItem item) {
   );
 }
 
-
 /* ───────────────────── SKILLS ───────────────────── */
 
 class _SkillsSection extends StatelessWidget {
@@ -1653,7 +1754,14 @@ class _SkillsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final designTools = ['Figma', 'Canva', 'Basic Adobe Photoshop'];
-    final devTools = ['HTML/CSS', 'Basic JS', 'Basic Flutter/Dart', 'Git', 'VS Code', 'Github'];
+    final devTools = [
+      'HTML/CSS',
+      'Basic JS',
+      'Basic Flutter/Dart',
+      'Git',
+      'VS Code',
+      'Github'
+    ];
     final softSkills = [
       'Collaboration',
       'Problem-solving',
@@ -1850,8 +1958,9 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
                   height: 6,
                   width: isActive ? 20 : 8,
                   decoration: BoxDecoration(
-                    color:
-                        isActive ? kSun : kParchment.withOpacity(0.4),
+                    color: isActive
+                        ? kSun
+                        : kParchment.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(999),
                   ),
                 );
