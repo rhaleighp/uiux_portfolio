@@ -992,7 +992,12 @@ class _ProjectsSection extends StatelessWidget {
             'RESFORCE: Army Reserve Record Management System for 402nd Community Defense Center',
         description:
             'A web-based record management system for the Army Reserve Command, helping automate reservist profiles, unit assignments, and document tracking.',
-        tags: ['Web app', 'Record Management', 'Information System'],
+        tags: [
+          'Web app',
+          'Record Management',
+          'Information System',
+          '402nd CDC',
+        ],
         role: 'Front-end / UI/UX Designer',
         timeframe: '2024 • Capstone system',
         caseStudyUrl: 'https://resforce.info',
@@ -1007,8 +1012,9 @@ class _ProjectsSection extends StatelessWidget {
           'assets/resforce/resforce_8.png',
         ],
         galleryCaptions: {
-          0: 'Login and dashboard view for RESFORCE, showing quick stats for reservists and units.',
-          1: 'Reservist profile screen with detailed personal information and training records.',
+          0: 'Capstone project developed for the 402nd Community Defense Center in Tanza, designed to modernize enlistment and reservist record management.',
+          1: 'Fully hosted web-based system featuring online enlistment, unit organization, profile records, and document tracking accessible via any browser.',
+          2: 'Developed using HTML5, CSS3, JavaScript, Node.js (Express), and Firebase as the core technologies supporting the RESFORCE platform.',
         },
       ),
       const ProjectCardData(
@@ -1016,7 +1022,7 @@ class _ProjectsSection extends StatelessWidget {
             'EPASS: Electronic Permit Application and Submission System for LPU–Cavite',
         description:
             'An online permit processing system for students and offices, streamlining event and activity requests, approvals, and documentation.',
-        tags: ['Web app', 'Workflow', 'University'],
+        tags: ['Web app', 'Tracking', 'LPU-Cavite', 'Permit System'],
         role: 'UI/UX Designer • Front-end Support',
         timeframe: '2024 • Academic project',
         caseStudyUrl: 'https://example.com/epass',
@@ -1032,15 +1038,16 @@ class _ProjectsSection extends StatelessWidget {
           'assets/epass/epass_9.png',
         ],
         galleryCaptions: {
-          0: 'EPASS dashboard with shortcuts to common permit workflows.',
-          1: 'Permit application form capturing student and event details.',
+          0: 'SIA project developed and successfully defended, designed for permit registration and processing at LPU–Cavite.',
+          1: 'Features online forms and approval flows for student activity and event permits within the LPU–Cavite system.',
+          2: 'Built using HTML5, CSS3, PHP, and MySQL (phpMyAdmin) as the core technologies.',
         },
       ),
       const ProjectCardData(
         title: 'StockUp – Inventory Management System',
         description:
             'An inventory management interface designed to help track stocks, movements, and low-quantity alerts for small businesses and organizations.',
-        tags: ['Inventory', 'Dashboard', 'Web app'],
+        tags: ['Inventory', 'Bulk Import/Export', 'Web app'],
         role: 'UI/UX Designer',
         timeframe: '2023 • Academic prototype',
         caseStudyUrl: null,
@@ -1065,12 +1072,17 @@ class _ProjectsSection extends StatelessWidget {
           'assets/stockup/stockup_18.png',
           'assets/stockup/stockup_19.png',
         ],
+        galleryCaptions: {
+          0: 'Academic inventory management project accessible only through local hosting, designed for tracking stocks and item movements.',
+          1: 'Includes bulk ordering, stock monitoring, and low-quantity alerts for small business use cases.',
+          2: 'Developed using HTML5, CSS3, PHP, and MySQL (phpMyAdmin) for managing records and item data.',
+        },
       ),
       const ProjectCardData(
         title: 'PawCentral PH: Pet Care Management Platform',
         description:
             'A concept platform for pet owners and clinics with QR-tagged pet profiles, vet visit tracking, and lost-and-found coordination flows.',
-        tags: ['Mobile app', 'UX Flows', 'Concept'],
+        tags: ['Web app', 'Pet Care', 'Prototype'],
         role: 'Product / UI/UX Designer',
         timeframe: '2024 • Personal project',
         caseStudyUrl: null,
@@ -1092,6 +1104,11 @@ class _ProjectsSection extends StatelessWidget {
           'assets/pawcentral/pawcentral_15.png',
           'assets/pawcentral/pawcentral_16.png',
         ],
+        galleryCaptions: {
+          0: 'Prototype designed in Figma as part of a business proposal to streamline pet care services across Cavite.',
+          1: 'Concept platform supporting pet registration, adoption workflows, vet appointments, and owner–clinic coordination.',
+          2: 'Features QR and microchip tagging, lost-and-found reporting, and centralized pet profile management.',
+        },
       ),
       const ProjectCardData(
         title: 'Matharlika',
@@ -1115,8 +1132,13 @@ class _ProjectsSection extends StatelessWidget {
           'assets/matharlika/matharlika_11.png',
           'assets/matharlika/matharlika_12.png',
           'assets/matharlika/matharlika_13.png',
-          'assets/matharlika/matharlika_14.png'
+          'assets/matharlika/matharlika_14.png',
         ],
+        galleryCaptions: {
+          0: 'Prototype created using Canva, designed as a gamified math learning experience for students.',
+          1: 'Features interactive problem-solving activities, a progressing storyline, and engaging UI elements.',
+          2: 'Includes leaderboard mechanics and game-type challenges to make mastering mathematical skills more motivating.',
+        },
       ),
       const ProjectCardData(
         title: 'PizzaMe',
@@ -1139,11 +1161,17 @@ class _ProjectsSection extends StatelessWidget {
           'assets/pizzame/pizzame_10.png',
           'assets/pizzame/pizzame_11.png',
         ],
+        galleryCaptions: {
+          0: 'Prototype created in Canva during 2nd year, exploring a pizza delivery and ordering experience.',
+          1: 'Features product browsing, selection, and cart flow designed for small local food businesses.',
+          2: 'Concept focuses on simple navigation and a streamlined ordering process for mobile users.',
+        },
       ),
       const ProjectCardData(
         title: 'NinjaHands',
         description:
-            'A playful productivity concept focusing on quick actions, shortcuts, and animated interactions.',
+            'A sign language learning app featuring animated video tutorials, gesture-tracking practice, and interactive quizzes to help users learn and reinforce ASL & FSL basics.',
+
         tags: ['Mobile app', 'UX Flows', 'Concept'],
         role: 'Product / UI/UX Designer',
         timeframe: '2024 • Personal project',
@@ -1163,6 +1191,11 @@ class _ProjectsSection extends StatelessWidget {
           'assets/ninjahands/12.png',
           'assets/ninjahands/13.png',
         ],
+        galleryCaptions: {
+          0: 'Canva-based prototype originally proposed as a capstone concept for an e-learning sign language platform.',
+          1: 'Features animated video lessons, text tutorials, and guided practice flows for learning ASL and FSL basics.',
+          2: 'Includes quizzes and progress analytics designed to track user improvement and reinforce learning.',
+        },
       ),
     ];
 
@@ -1310,9 +1343,7 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
       context: context,
       builder: (context) => Dialog(
         backgroundColor: kParchment,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -1366,10 +1397,7 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
               borderRadius: BorderRadius.circular(24),
             ),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 780,
-                maxHeight: 620,
-              ),
+              constraints: const BoxConstraints(maxWidth: 780, maxHeight: 620),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -1548,10 +1576,7 @@ void _showZoomImageDialog(
                     minScale: 1.0,
                     maxScale: 4.0,
                     child: Center(
-                      child: Image.asset(
-                        assetPath,
-                        fit: BoxFit.contain,
-                      ),
+                      child: Image.asset(assetPath, fit: BoxFit.contain),
                     ),
                   ),
                 ),
@@ -1758,16 +1783,17 @@ class _CertificationsSection extends StatelessWidget {
         issuer: 'UNESCO Philippines',
         year: '2024',
         details:
-            'Represented as a student delegate, collaborating with a team to ideate and design digital solutions for youth- and community-focused challenges.',
+            'Participated as part of the ResForce team, collaborating to ideate and design digital solutions for youth- and community-focused challenges.',
         imageAsset: 'assets/certs/unesco_hackathon_delegate.png',
       ),
+
       _CertificationItem(
         title:
             'NextGenPH: Youth Innovators Reimagining Public Service – Delegate',
         issuer: 'Development Academy of the Philippines',
         year: '2022–2024',
         details:
-            'Engaged in sessions on governance, innovation, and public service, contributing ideas on how technology and design can support civic initiatives.',
+            'Engaged, together with the ResForce team, in sessions on governance, innovation, and public service, contributing ideas on how technology and design can support civic initiatives.',
         imageAsset: 'assets/certs/nextgenph_delegate.png',
       ),
     ];
@@ -1792,7 +1818,7 @@ class _CertificationsSection extends StatelessWidget {
                 .map(
                   (entry) => SizedBox(
                     width: 360,
-                    height: 220, // 👈 fixed height for equal-sized cards
+                    height: 220, // fixed height for equal-sized cards
                     child: ScrollFadeIn(
                       delay: Duration(milliseconds: 80 + entry.key * 80),
                       child: HoverCard(
@@ -1886,14 +1912,9 @@ void _showCertificationDialog(BuildContext context, _CertificationItem item) {
     builder: (context) {
       return Dialog(
         backgroundColor: kParchment,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 600,
-            maxHeight: 600,
-          ),
+          constraints: const BoxConstraints(maxWidth: 600, maxHeight: 600),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -1931,10 +1952,7 @@ void _showCertificationDialog(BuildContext context, _CertificationItem item) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: item.imageAsset != null
-                        ? Image.asset(
-                            item.imageAsset!,
-                            fit: BoxFit.contain,
-                          )
+                        ? Image.asset(item.imageAsset!, fit: BoxFit.contain)
                         : Center(
                             child: Text(
                               'Certificate preview coming soon.',
@@ -1955,7 +1973,7 @@ void _showCertificationDialog(BuildContext context, _CertificationItem item) {
   );
 }
 
-/* ───────────────────── SKILLS – CLEAN HORIZONTAL METERS ───────────────────── */
+/* ───────────────────── SKILLS – HORIZONTAL + CENTERED SOFT SKILLS ───────────────────── */
 
 class _SkillsSection extends StatelessWidget {
   const _SkillsSection();
@@ -1964,15 +1982,31 @@ class _SkillsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final designSkills = [
       const _SkillBarData('Figma', 0.9, 'Wireframes • UI kits • Prototypes'),
-      const _SkillBarData('Canva', 0.85, 'Pubmats • Posters • Social media'),
-      const _SkillBarData('Photoshop (basic)', 0.6, 'Simple edits • Layout tweaks'),
+      const _SkillBarData('Canva', 0.9, 'Pubmats • Posters • Social media'),
+      const _SkillBarData(
+        'Photoshop (basic)',
+        0.6,
+        'Simple edits • Layout tweaks',
+      ),
     ];
 
     final devSkills = [
       const _SkillBarData('HTML / CSS', 0.9, 'Semantic, responsive layouts'),
-      const _SkillBarData('JavaScript (basic)', 0.6, 'Interactions • UI behavior'),
-      const _SkillBarData('Flutter / Dart (basic)', 0.55, 'UI screens • Simple logic'),
-      const _SkillBarData('Git / GitHub', 0.7, 'Collaboration • Version control'),
+      const _SkillBarData(
+        'JavaScript (basic)',
+        0.6,
+        'Interactions • UI behavior',
+      ),
+      const _SkillBarData(
+        'Flutter / Dart (basic)',
+        0.4,
+        'UI screens • Simple logic',
+      ),
+      const _SkillBarData(
+        'Git / GitHub',
+        0.75,
+        'Collaboration • Version control',
+      ),
     ];
 
     final softSkills = [
@@ -1983,80 +2017,72 @@ class _SkillsSection extends StatelessWidget {
       'Time management',
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _SectionTitle(
-          label: 'Skills',
-          tagline: 'Tools, technologies, and ways I work.',
-        ),
-        const SizedBox(height: 12),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final isWide = constraints.maxWidth > 880;
-            final columnWidth =
-                isWide ? (constraints.maxWidth - 24) / 2 : constraints.maxWidth;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth;
+        final softCardWidth = math.min(maxWidth, 520.0);
 
-            return Wrap(
-              spacing: 24,
-              runSpacing: 18,
-              children: [
-                SizedBox(
-                  width: columnWidth,
-                  child: ScrollFadeIn(
-                    delay: const Duration(milliseconds: 60),
-                    child: HoverCard(
-                      child: Container(
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: kParchment,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: kSun.withOpacity(0.4)),
-                        ),
-                        child: Column(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionTitle(
+              label: 'Skills',
+              tagline: 'Tools, technologies, and ways I work.',
+            ),
+            const SizedBox(height: 12),
+
+            // DESIGN & FRONT-END CARD
+            ScrollFadeIn(
+              delay: const Duration(milliseconds: 60),
+              child: HoverCard(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: kParchment,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: kSun.withOpacity(0.4)),
+                  ),
+                  child: LayoutBuilder(
+                    builder: (context, innerConstraints) {
+                      final isWide = innerConstraints.maxWidth > 680;
+
+                      Widget buildDesignColumn() {
+                        return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                _SkillIconBadge(
-                                  icon: Icons.brush_rounded,
-                                  color: kLeaf,
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Design & Front-end',
-                                        style: GoogleFonts.nunito(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          color: kDeepGreen,
-                                        ),
-                                      ),
-                                      Text(
-                                        'A mix of UI design and implementation.',
-                                        style: GoogleFonts.nunito(
-                                          fontSize: 11,
-                                          color: kText.withOpacity(0.7),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Design tools',
+                              style: GoogleFonts.nunito(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: kText.withOpacity(0.8),
+                              ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 8),
                             ...designSkills.map(
                               (s) => Padding(
                                 padding: const EdgeInsets.only(bottom: 10),
                                 child: _SkillMeterRow(data: s),
                               ),
                             ),
+                          ],
+                        );
+                      }
+
+                      Widget buildDevColumn() {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Front-end & dev basics',
+                              style: GoogleFonts.nunito(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: kText.withOpacity(0.8),
+                              ),
+                            ),
                             const SizedBox(height: 8),
-                            const Divider(height: 16),
-                            const SizedBox(height: 4),
                             ...devSkills.map(
                               (s) => Padding(
                                 padding: const EdgeInsets.only(bottom: 10),
@@ -2064,105 +2090,170 @@ class _SkillsSection extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: columnWidth,
-                  child: ScrollFadeIn(
-                    delay: const Duration(milliseconds: 120),
-                    child: HoverCard(
-                      child: Container(
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: kDeepGreen,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: kSun.withOpacity(0.5)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                _SkillIconBadge(
-                                  icon: Icons.people_alt_rounded,
-                                  color: kSun,
-                                  dark: true,
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Soft skills & working style',
-                                        style: GoogleFonts.nunito(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          color: kParchment,
-                                        ),
-                                      ),
-                                      Text(
-                                        'How I work with teams and projects.',
-                                        style: GoogleFonts.nunito(
-                                          fontSize: 11,
-                                          color: kParchment.withOpacity(0.7),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 14),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: softSkills
-                                  .map(
-                                    (s) => Chip(
-                                      label: Text(
-                                        s,
-                                        style: GoogleFonts.nunito(
-                                          fontSize: 11,
-                                          color: kParchment,
-                                        ),
-                                      ),
-                                      side: BorderSide(
-                                        color: kParchment.withOpacity(0.3),
-                                      ),
-                                      backgroundColor:
-                                          kSoftGreen.withOpacity(0.75),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(999),
+                        );
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              _SkillIconBadge(
+                                icon: Icons.brush_rounded,
+                                color: kLeaf,
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Design & Front-end',
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: kDeepGreen,
                                       ),
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'I’m comfortable learning new tools quickly as long as the goal is clear and user experience comes first.',
-                              style: GoogleFonts.nunito(
-                                fontSize: 11,
-                                height: 1.6,
-                                color: kParchment.withOpacity(0.85),
+                                    Text(
+                                      'A mix of UI design and implementation.',
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 11,
+                                        color: kText.withOpacity(0.7),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+
+                          if (isWide)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(child: buildDesignColumn()),
+                                const SizedBox(width: 24),
+                                Expanded(child: buildDevColumn()),
+                              ],
+                            )
+                          else
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildDesignColumn(),
+                                const SizedBox(height: 8),
+                                const Divider(height: 16),
+                                const SizedBox(height: 4),
+                                buildDevColumn(),
+                              ],
                             ),
-                          ],
-                        ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 18),
+
+            // SOFT SKILLS CARD CENTERED BELOW
+            Center(
+              child: SizedBox(
+                width: softCardWidth,
+                child: ScrollFadeIn(
+                  delay: const Duration(milliseconds: 120),
+                  child: HoverCard(
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: kDeepGreen,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: kSun.withOpacity(0.5)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              _SkillIconBadge(
+                                icon: Icons.people_alt_rounded,
+                                color: kSun,
+                                dark: true,
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Soft skills & working style',
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: kParchment,
+                                      ),
+                                    ),
+                                    Text(
+                                      'How I work with teams and projects.',
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 11,
+                                        color: kParchment.withOpacity(0.7),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: softSkills
+                                .map(
+                                  (s) => Chip(
+                                    label: Text(
+                                      s,
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 11,
+                                        color: kParchment,
+                                      ),
+                                    ),
+                                    side: BorderSide(
+                                      color: kParchment.withOpacity(0.3),
+                                    ),
+                                    backgroundColor: kSoftGreen.withOpacity(
+                                      0.75,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(999),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'I’m comfortable learning new tools quickly as long as the goal is clear and user experience comes first.',
+                            style: GoogleFonts.nunito(
+                              fontSize: 11,
+                              height: 1.6,
+                              color: kParchment.withOpacity(0.85),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
-      ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -2185,11 +2276,7 @@ class _SkillIconBadge extends StatelessWidget {
         color: dark ? Colors.black.withOpacity(0.15) : color.withOpacity(0.12),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Icon(
-        icon,
-        size: 18,
-        color: dark ? kSun : color,
-      ),
+      child: Icon(icon, size: 18, color: dark ? kSun : color),
     );
   }
 }
@@ -2256,8 +2343,10 @@ class _SkillMeterRowState extends State<_SkillMeterRow> {
               LayoutBuilder(
                 builder: (context, constraints) {
                   final maxWidth = constraints.maxWidth;
-                  final barWidth =
-                      (maxWidth * value).clamp(0.0, maxWidth.toDouble());
+                  final barWidth = (maxWidth * value).clamp(
+                    0.0,
+                    maxWidth.toDouble(),
+                  );
                   return Container(
                     height: _hovering ? 10 : 8,
                     decoration: BoxDecoration(
@@ -2273,10 +2362,7 @@ class _SkillMeterRowState extends State<_SkillMeterRow> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [
-                            kLeaf,
-                            kSun.withOpacity(0.9),
-                          ],
+                          colors: [kLeaf, kSun.withOpacity(0.9)],
                         ),
                         boxShadow: _hovering
                             ? [
@@ -2308,7 +2394,7 @@ class _SkillMeterRowState extends State<_SkillMeterRow> {
   }
 }
 
-/* ───────────────────── DESIGN GALLERY – CLEAN GLOWY CAROUSEL ───────────────────── */
+/* ───────────────────── DESIGN GALLERY – SIMPLE CAROUSEL (NO GLOW) ───────────────────── */
 
 class _DesignGallerySection extends StatefulWidget {
   const _DesignGallerySection();
@@ -2319,68 +2405,87 @@ class _DesignGallerySection extends StatefulWidget {
 
 class _DesignGallerySectionState extends State<_DesignGallerySection> {
   late final PageController _pageController;
+  late final Timer _autoScrollTimer;
   double _page = 0;
 
   final List<_DesignShot> _shots = const [
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_1.png',
-      label: 'Campus event poster',
+      label: 'Survey Advertisment Poster',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_2.png',
-      label: 'Announcement layout',
+      label: 'ResForce Handbook Cover',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_3.png',
-      label: 'Social media tile',
+      label: 'ResForce Competition PPT',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_4.png',
-      label: 'Carousel slide',
+      label: 'Brochure Design',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_5.png',
-      label: 'Event highlight',
+      label: 'Brochure Design',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_7.png',
-      label: 'Poster variation',
+      label: 'LPU Research Colloquium PPT',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_8.png',
-      label: 'Information card',
+      label: 'Infographic Visual',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_9.png',
-      label: 'Org announcement',
+      label: 'Infographic Visual',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_10.png',
-      label: 'Campaign visual',
+      label: 'NSTP Poster',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_11.png',
-      label: 'Horizontal banner',
+      label: 'COECSA Pubmat',
     ),
     _DesignShot(
       imageAsset: 'assets/pubmats/pubmat_12.png',
-      label: 'Closing slide',
+      label: 'Pubmat Design',
     ),
   ];
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.74);
+    // bigger viewportFraction = bigger image in the viewport
+    _pageController = PageController(viewportFraction: 0.86);
     _pageController.addListener(() {
       setState(() {
         _page = _pageController.page ?? 0;
       });
     });
+
+    // Auto-scroll every 5 seconds
+    _autoScrollTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+      if (!_pageController.hasClients ||
+          !_pageController.position.hasContentDimensions ||
+          _shots.length <= 1) {
+        return;
+      }
+      final current = _pageController.page ?? 0;
+      final nextPage = (current.round() + 1) % _shots.length;
+      _pageController.animateToPage(
+        nextPage,
+        duration: const Duration(milliseconds: 550),
+        curve: Curves.easeOutCubic,
+      );
+    });
   }
 
   @override
   void dispose() {
+    _autoScrollTimer.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -2397,32 +2502,19 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 420,
+          height: 440,
           child: Stack(
+            clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
-              // background glow behind the carousel
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: const Alignment(0, -0.1),
-                      radius: 1.1,
-                      colors: [
-                        kSun.withOpacity(0.28),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // main carousel (no background glow)
               PageView.builder(
                 controller: _pageController,
                 itemCount: _shots.length,
                 itemBuilder: (context, index) {
                   final distance = (index - _page).abs();
-                  final scale = (1 - distance * 0.16).clamp(0.82, 1.0);
-                  final opacity = (1 - distance * 0.35).clamp(0.25, 1.0);
+                  final scale = (1 - distance * 0.12).clamp(0.9, 1.0);
+                  final opacity = (1 - distance * 0.4).clamp(0.45, 1.0);
 
                   return Center(
                     child: Opacity(
@@ -2436,6 +2528,43 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
                     ),
                   );
                 },
+              ),
+
+              // previous button
+              Positioned(
+                left: 12,
+                child: _GalleryArrowButton(
+                  icon: Icons.chevron_left_rounded,
+                  onTap: () {
+                    if (!_pageController.hasClients) return;
+                    final current = _pageController.page ?? 0;
+                    final prevPage =
+                        (current.round() - 1 + _shots.length) % _shots.length;
+                    _pageController.animateToPage(
+                      prevPage,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeOutCubic,
+                    );
+                  },
+                ),
+              ),
+
+              // next button
+              Positioned(
+                right: 12,
+                child: _GalleryArrowButton(
+                  icon: Icons.chevron_right_rounded,
+                  onTap: () {
+                    if (!_pageController.hasClients) return;
+                    final current = _pageController.page ?? 0;
+                    final nextPage = (current.round() + 1) % _shots.length;
+                    _pageController.animateToPage(
+                      nextPage,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeOutCubic,
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -2463,14 +2592,34 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
   }
 }
 
+class _GalleryArrowButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _GalleryArrowButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black.withOpacity(0.35),
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Icon(icon, size: 22, color: kParchment),
+        ),
+      ),
+    );
+  }
+}
+
 class _DesignShot {
   final String imageAsset;
   final String? label;
 
-  const _DesignShot({
-    required this.imageAsset,
-    this.label,
-  });
+  const _DesignShot({required this.imageAsset, this.label});
 }
 
 class _DesignShotImage extends StatefulWidget {
@@ -2506,38 +2655,23 @@ class _DesignShotImageState extends State<_DesignShotImage> {
           duration: const Duration(milliseconds: 150),
           curve: Curves.easeOut,
           child: Container(
-            width: 520,
+            // fill the page viewport for maximum size
+            width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(26),
-              boxShadow: [
-                BoxShadow(
-                  color: kSun.withOpacity(_hovering ? 0.7 : 0.45),
-                  blurRadius: _hovering ? 42 : 30,
-                  spreadRadius: _hovering ? 20 : 14,
-                  offset: const Offset(0, 18),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(28),
+              // 👇 glow removed: no boxShadow here
+              // boxShadow: [],
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Stack(
                 children: [
-                  // poster
                   Positioned.fill(
-                    child: Container(
-                      color: kParchment,
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: Image.asset(
-                          widget.shot.imageAsset,
-                          width: double.infinity,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                    child: Image.asset(
+                      widget.shot.imageAsset,
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  // tiny label overlay
                   if (widget.shot.label != null)
                     Positioned(
                       left: 12,
@@ -2623,10 +2757,7 @@ void _showDesignZoomDialog(BuildContext context, _DesignShot shot) {
                     minScale: 1,
                     maxScale: 4,
                     child: Center(
-                      child: Image.asset(
-                        shot.imageAsset,
-                        fit: BoxFit.contain,
-                      ),
+                      child: Image.asset(shot.imageAsset, fit: BoxFit.contain),
                     ),
                   ),
                 ),
@@ -2661,10 +2792,7 @@ class _ContactSection extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                kSoftGreen,
-                kDeepGreen,
-              ],
+              colors: [kSoftGreen, kDeepGreen],
             ),
             borderRadius: BorderRadius.circular(22),
             border: Border.all(color: kSun.withOpacity(0.5)),
@@ -2722,14 +2850,17 @@ class _ContactSection extends StatelessWidget {
                                 // TODO: hook to Behance / portfolio link
                               },
                               icon: const Icon(Icons.link_rounded, size: 18),
-                              label: const Text('View full portfolio'),
+                              label: const Text('View Github profile'),
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  if (isWide) const SizedBox(width: 24) else const SizedBox(height: 18),
+                  if (isWide)
+                    const SizedBox(width: 24)
+                  else
+                    const SizedBox(height: 18),
                   Expanded(
                     flex: isWide ? 2 : 0,
                     child: Column(
@@ -2743,8 +2874,8 @@ class _ContactSection extends StatelessWidget {
                         SizedBox(height: 8),
                         _ContactMethodCard(
                           icon: Icons.web_rounded,
-                          label: 'Portfolio / Case Studies',
-                          value: 'behance.com/your-handle',
+                          label: 'Github',
+                          value: 'https://github.com/rhaleighp15',
                         ),
                         SizedBox(height: 8),
                         _ContactMethodCard(
@@ -2837,7 +2968,7 @@ class _ContactMethodCard extends StatelessWidget {
   }
 }
 
-/* ───────────────────── HOVER CARD (SAME AS BEFORE) ───────────────────── */
+/* ───────────────────── HOVER CARD ───────────────────── */
 
 class HoverCard extends StatefulWidget {
   final Widget child;
