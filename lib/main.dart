@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'dart:async';
 
-
 /* ───────────────────── PALETTE ───────────────────── */
 
 const Color kBg = Color(0xFF18190C); // deep olive background
@@ -1007,6 +1006,10 @@ class _ProjectsSection extends StatelessWidget {
           'assets/resforce/resforce_7.png',
           'assets/resforce/resforce_8.png',
         ],
+        galleryCaptions: {
+          0: 'Login and dashboard view for RESFORCE, showing quick stats for reservists and units.',
+          1: 'Reservist profile screen with detailed personal information and training records.',
+        },
       ),
       const ProjectCardData(
         title:
@@ -1028,6 +1031,10 @@ class _ProjectsSection extends StatelessWidget {
           'assets/epass/epass_8.png',
           'assets/epass/epass_9.png',
         ],
+        galleryCaptions: {
+          0: 'EPASS dashboard with shortcuts to common permit workflows.',
+          1: 'Permit application form capturing student and event details.',
+        },
       ),
       const ProjectCardData(
         title: 'StockUp – Inventory Management System',
@@ -1039,6 +1046,24 @@ class _ProjectsSection extends StatelessWidget {
         caseStudyUrl: null,
         gallery: [
           'assets/stockup/stockup_1.png',
+          'assets/stockup/stockup_2.png',
+          'assets/stockup/stockup_3.png',
+          'assets/stockup/stockup_4.png',
+          'assets/stockup/stockup_5.png',
+          'assets/stockup/stockup_6.png',
+          'assets/stockup/stockup_7.png',
+          'assets/stockup/stockup_8.png',
+          'assets/stockup/stockup_9.png',
+          'assets/stockup/stockup_10.png',
+          'assets/stockup/stockup_11.png',
+          'assets/stockup/stockup_12.png',
+          'assets/stockup/stockup_13.png',
+          'assets/stockup/stockup_14.png',
+          'assets/stockup/stockup_15.png',
+          'assets/stockup/stockup_16.png',
+          'assets/stockup/stockup_17.png',
+          'assets/stockup/stockup_18.png',
+          'assets/stockup/stockup_19.png',
         ],
       ),
       const ProjectCardData(
@@ -1195,6 +1220,9 @@ class ProjectCardData {
   final String? caseStudyUrl;
   final List<String> gallery;
 
+  /// key = image index, value = description for that image
+  final Map<int, String> galleryCaptions;
+
   const ProjectCardData({
     required this.title,
     required this.description,
@@ -1203,6 +1231,7 @@ class ProjectCardData {
     this.timeframe,
     this.caseStudyUrl,
     this.gallery = const [],
+    this.galleryCaptions = const {},
   });
 }
 
@@ -1273,7 +1302,7 @@ class ProjectCard extends StatelessWidget {
   }
 }
 
-/* ───────────── PROJECT GALLERY DIALOG (CLICK CARD → IMAGES ONLY) ───────────── */
+/* ───────────── PROJECT GALLERY DIALOG (CLICK CARD → IMAGES + CAPTION + ZOOM) ───────────── */
 
 void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
   if (data.gallery.isEmpty) {
@@ -1329,6 +1358,7 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
       return StatefulBuilder(
         builder: (context, setState) {
           final total = data.gallery.length;
+          final caption = data.galleryCaptions[currentIndex];
 
           return Dialog(
             backgroundColor: kParchment,
@@ -1365,16 +1395,56 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    // Image viewer
+                    // Image viewer with caption overlay + click to zoom
                     Expanded(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(18),
                         child: Container(
                           color: Colors.black.withOpacity(0.05),
-                          child: Center(
-                            child: Image.asset(
+                          child: GestureDetector(
+                            onTap: () => _showZoomImageDialog(
+                              context,
                               data.gallery[currentIndex],
-                              fit: BoxFit.contain,
+                              caption: caption,
+                            ),
+                            child: Stack(
+                              children: [
+                                Center(
+                                  child: Image.asset(
+                                    data.gallery[currentIndex],
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                if (caption != null && caption.isNotEmpty)
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.black.withOpacity(0.6),
+                                          ],
+                                        ),
+                                      ),
+                                      child: Text(
+                                        caption,
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 12,
+                                          height: 1.4,
+                                          color: kParchment,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         ),
@@ -1427,6 +1497,82 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
             ),
           );
         },
+      );
+    },
+  );
+}
+
+/// Full-screen zoom dialog for project screenshots
+void _showZoomImageDialog(
+  BuildContext context,
+  String assetPath, {
+  String? caption,
+}) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.black.withOpacity(0.9),
+        insetPadding: const EdgeInsets.all(16),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Top bar with close
+              Row(
+                children: [
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Zoom view',
+                      style: GoogleFonts.nunito(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: kParchment,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: kParchment),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: InteractiveViewer(
+                    panEnabled: true,
+                    minScale: 1.0,
+                    maxScale: 4.0,
+                    child: Center(
+                      child: Image.asset(
+                        assetPath,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              if (caption != null && caption.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    caption,
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      height: 1.4,
+                      color: kParchment.withOpacity(0.9),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
       );
     },
   );
@@ -1634,24 +1780,29 @@ class _CertificationsSection extends StatelessWidget {
           tagline: 'Learning beyond the classroom.',
         ),
         const SizedBox(height: 6),
-        Wrap(
-          spacing: 18,
-          runSpacing: 18,
-          children: certs
-              .asMap()
-              .entries
-              .map(
-                (entry) => SizedBox(
-                  width: 360,
-                  child: ScrollFadeIn(
-                    delay: Duration(milliseconds: 80 + entry.key * 80),
-                    child: HoverCard(
-                      child: _CertificationTile(item: entry.value),
+        Center(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            runAlignment: WrapAlignment.center,
+            spacing: 18,
+            runSpacing: 18,
+            children: certs
+                .asMap()
+                .entries
+                .map(
+                  (entry) => SizedBox(
+                    width: 360,
+                    height: 220, // 👈 fixed height for equal-sized cards
+                    child: ScrollFadeIn(
+                      delay: Duration(milliseconds: 80 + entry.key * 80),
+                      child: HoverCard(
+                        child: _CertificationTile(item: entry.value),
+                      ),
                     ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ],
     );
@@ -1710,12 +1861,14 @@ class _CertificationTile extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              item.details,
-              style: GoogleFonts.nunito(
-                fontSize: 12,
-                height: 1.6,
-                color: kText.withOpacity(0.9),
+            Expanded(
+              child: Text(
+                item.details,
+                style: GoogleFonts.nunito(
+                  fontSize: 12,
+                  height: 1.6,
+                  color: kText.withOpacity(0.9),
+                ),
               ),
             ),
           ],
@@ -1802,29 +1955,32 @@ void _showCertificationDialog(BuildContext context, _CertificationItem item) {
   );
 }
 
-/* ───────────────────── SKILLS ───────────────────── */
+/* ───────────────────── SKILLS – CLEAN HORIZONTAL METERS ───────────────────── */
 
 class _SkillsSection extends StatelessWidget {
   const _SkillsSection();
 
   @override
   Widget build(BuildContext context) {
-    final designTools = ['Figma', 'Canva', 'Basic Adobe Photoshop'];
-    final devTools = [
-      'HTML/CSS',
-      'Basic JS',
-      'Basic Flutter/Dart',
-      'Git',
-      'VS Code',
-      'Github'
+    final designSkills = [
+      const _SkillBarData('Figma', 0.9, 'Wireframes • UI kits • Prototypes'),
+      const _SkillBarData('Canva', 0.85, 'Pubmats • Posters • Social media'),
+      const _SkillBarData('Photoshop (basic)', 0.6, 'Simple edits • Layout tweaks'),
     ];
+
+    final devSkills = [
+      const _SkillBarData('HTML / CSS', 0.9, 'Semantic, responsive layouts'),
+      const _SkillBarData('JavaScript (basic)', 0.6, 'Interactions • UI behavior'),
+      const _SkillBarData('Flutter / Dart (basic)', 0.55, 'UI screens • Simple logic'),
+      const _SkillBarData('Git / GitHub', 0.7, 'Collaboration • Version control'),
+    ];
+
     final softSkills = [
       'Collaboration',
+      'Clear communication',
       'Problem-solving',
-      'Communication',
       'Attention to detail',
-      'Attention to detail',
-      'Attention to detail',
+      'Time management',
     ];
 
     return Column(
@@ -1832,82 +1988,327 @@ class _SkillsSection extends StatelessWidget {
       children: [
         const _SectionTitle(
           label: 'Skills',
-          tagline: 'What I bring to a team.',
+          tagline: 'Tools, technologies, and ways I work.',
         ),
-        const SizedBox(height: 6),
-        Wrap(
-          spacing: 18,
-          runSpacing: 18,
-          children: [
-            ScrollFadeIn(
-              delay: const Duration(milliseconds: 80),
-              child: _SkillGroup(title: 'Design tools', items: designTools),
-            ),
-            ScrollFadeIn(
-              delay: const Duration(milliseconds: 120),
-              child: _SkillGroup(title: 'Development', items: devTools),
-            ),
-            ScrollFadeIn(
-              delay: const Duration(milliseconds: 160),
-              child: _SkillGroup(title: 'Soft skills', items: softSkills),
-            ),
-          ],
+        const SizedBox(height: 12),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth > 880;
+            final columnWidth =
+                isWide ? (constraints.maxWidth - 24) / 2 : constraints.maxWidth;
+
+            return Wrap(
+              spacing: 24,
+              runSpacing: 18,
+              children: [
+                SizedBox(
+                  width: columnWidth,
+                  child: ScrollFadeIn(
+                    delay: const Duration(milliseconds: 60),
+                    child: HoverCard(
+                      child: Container(
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: kParchment,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: kSun.withOpacity(0.4)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                _SkillIconBadge(
+                                  icon: Icons.brush_rounded,
+                                  color: kLeaf,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Design & Front-end',
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: kDeepGreen,
+                                        ),
+                                      ),
+                                      Text(
+                                        'A mix of UI design and implementation.',
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 11,
+                                          color: kText.withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            ...designSkills.map(
+                              (s) => Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: _SkillMeterRow(data: s),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Divider(height: 16),
+                            const SizedBox(height: 4),
+                            ...devSkills.map(
+                              (s) => Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: _SkillMeterRow(data: s),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: columnWidth,
+                  child: ScrollFadeIn(
+                    delay: const Duration(milliseconds: 120),
+                    child: HoverCard(
+                      child: Container(
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: kDeepGreen,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: kSun.withOpacity(0.5)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                _SkillIconBadge(
+                                  icon: Icons.people_alt_rounded,
+                                  color: kSun,
+                                  dark: true,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Soft skills & working style',
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: kParchment,
+                                        ),
+                                      ),
+                                      Text(
+                                        'How I work with teams and projects.',
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 11,
+                                          color: kParchment.withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: softSkills
+                                  .map(
+                                    (s) => Chip(
+                                      label: Text(
+                                        s,
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 11,
+                                          color: kParchment,
+                                        ),
+                                      ),
+                                      side: BorderSide(
+                                        color: kParchment.withOpacity(0.3),
+                                      ),
+                                      backgroundColor:
+                                          kSoftGreen.withOpacity(0.75),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(999),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'I’m comfortable learning new tools quickly as long as the goal is clear and user experience comes first.',
+                              style: GoogleFonts.nunito(
+                                fontSize: 11,
+                                height: 1.6,
+                                color: kParchment.withOpacity(0.85),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
   }
 }
 
-class _SkillGroup extends StatelessWidget {
-  final String title;
-  final List<String> items;
-  const _SkillGroup({required this.title, required this.items});
+class _SkillIconBadge extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final bool dark;
+  const _SkillIconBadge({
+    required this.icon,
+    required this.color,
+    this.dark = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 320,
-      child: HoverCard(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: kParchment,
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: kSun.withOpacity(0.4)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: GoogleFonts.nunito(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: kDeepGreen,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: items
-                    .map(
-                      (i) => Chip(
-                        label: Text(i, style: const TextStyle(fontSize: 11)),
-                        backgroundColor: kSoftGreen,
-                      ),
-                    )
-                    .toList(),
-              ),
-            ],
-          ),
-        ),
+    return Container(
+      padding: const EdgeInsets.all(7),
+      decoration: BoxDecoration(
+        color: dark ? Colors.black.withOpacity(0.15) : color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Icon(
+        icon,
+        size: 18,
+        color: dark ? kSun : color,
       ),
     );
   }
 }
 
-/* ───────────────────── DESIGN GALLERY – CAROUSEL ───────────────────── */
+class _SkillBarData {
+  final String label;
+  final double level; // 0–1
+  final String helper;
+
+  const _SkillBarData(this.label, this.level, this.helper);
+}
+
+class _SkillMeterRow extends StatefulWidget {
+  final _SkillBarData data;
+  const _SkillMeterRow({required this.data});
+
+  @override
+  State<_SkillMeterRow> createState() => _SkillMeterRowState();
+}
+
+class _SkillMeterRowState extends State<_SkillMeterRow> {
+  bool _hovering = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovering = true),
+      onExit: (_) => setState(() => _hovering = false),
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0, end: widget.data.level),
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeOutCubic,
+        builder: (context, value, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.data.label,
+                      style: GoogleFonts.nunito(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: kText,
+                      ),
+                    ),
+                  ),
+                  AnimatedOpacity(
+                    duration: const Duration(milliseconds: 180),
+                    opacity: _hovering ? 1.0 : 0.0,
+                    child: Text(
+                      '${(widget.data.level * 100).round()}%',
+                      style: GoogleFonts.nunito(
+                        fontSize: 11,
+                        color: kText.withOpacity(0.7),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final maxWidth = constraints.maxWidth;
+                  final barWidth =
+                      (maxWidth * value).clamp(0.0, maxWidth.toDouble());
+                  return Container(
+                    height: _hovering ? 10 : 8,
+                    decoration: BoxDecoration(
+                      color: kText.withOpacity(0.06),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      width: barWidth,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(999),
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            kLeaf,
+                            kSun.withOpacity(0.9),
+                          ],
+                        ),
+                        boxShadow: _hovering
+                            ? [
+                                BoxShadow(
+                                  color: kSun.withOpacity(0.45),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 8),
+                                ),
+                              ]
+                            : [],
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 3),
+              Text(
+                widget.data.helper,
+                style: GoogleFonts.nunito(
+                  fontSize: 10,
+                  color: kText.withOpacity(0.65),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/* ───────────────────── DESIGN GALLERY – CLEAN GLOWY CAROUSEL ───────────────────── */
 
 class _DesignGallerySection extends StatefulWidget {
   const _DesignGallerySection();
@@ -1919,50 +2320,67 @@ class _DesignGallerySection extends StatefulWidget {
 class _DesignGallerySectionState extends State<_DesignGallerySection> {
   late final PageController _pageController;
   double _page = 0;
-  Timer? _autoScrollTimer;
 
-  // pubmat_1.png → pubmat_12.png
   final List<_DesignShot> _shots = const [
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_1.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_2.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_3.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_4.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_5.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_6.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_7.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_8.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_9.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_10.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_11.png'),
-    _DesignShot(imageAsset: 'assets/pubmats/pubmat_12.png'),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_1.png',
+      label: 'Campus event poster',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_2.png',
+      label: 'Announcement layout',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_3.png',
+      label: 'Social media tile',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_4.png',
+      label: 'Carousel slide',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_5.png',
+      label: 'Event highlight',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_7.png',
+      label: 'Poster variation',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_8.png',
+      label: 'Information card',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_9.png',
+      label: 'Org announcement',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_10.png',
+      label: 'Campaign visual',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_11.png',
+      label: 'Horizontal banner',
+    ),
+    _DesignShot(
+      imageAsset: 'assets/pubmats/pubmat_12.png',
+      label: 'Closing slide',
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.78);
+    _pageController = PageController(viewportFraction: 0.74);
     _pageController.addListener(() {
       setState(() {
         _page = _pageController.page ?? 0;
       });
     });
-
-    // Auto-scroll every 4 seconds
-    _autoScrollTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
-      if (!mounted || _shots.isEmpty) return;
-      final current = _page.round();
-      final next = (current + 1) % _shots.length;
-      _pageController.animateToPage(
-        next,
-        duration: const Duration(milliseconds: 700),
-        curve: Curves.easeInOut,
-      );
-    });
   }
 
   @override
   void dispose() {
-    _autoScrollTimer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -1970,61 +2388,75 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const _SectionTitle(
           label: 'Design Gallery',
-          tagline: 'Selected UI explorations & pubmats.',
+          tagline: 'UI screens, posters, and social visuals.',
           center: true,
         ),
         const SizedBox(height: 8),
         SizedBox(
-          // bigger carousel height
-          height: 440,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: _shots.length,
-            itemBuilder: (context, index) {
-              final shot = _shots[index];
-              final distance = (index - _page).abs();
-              final scale = 1 - (distance * 0.15).clamp(0.0, 0.3);
-              final opacity = 1 - (distance * 0.3).clamp(0.0, 0.5);
-
-              return Center(
-                child: Transform.scale(
-                  scale: scale,
-                  child: Opacity(
-                    opacity: opacity,
-                    child: HoverCard(
-                      child: _DesignCard(shot: shot),
+          height: 420,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // background glow behind the carousel
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: const Alignment(0, -0.1),
+                      radius: 1.1,
+                      colors: [
+                        kSun.withOpacity(0.28),
+                        Colors.transparent,
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+              PageView.builder(
+                controller: _pageController,
+                itemCount: _shots.length,
+                itemBuilder: (context, index) {
+                  final distance = (index - _page).abs();
+                  final scale = (1 - distance * 0.16).clamp(0.82, 1.0);
+                  final opacity = (1 - distance * 0.35).clamp(0.25, 1.0);
+
+                  return Center(
+                    child: Opacity(
+                      opacity: opacity,
+                      child: _DesignShotImage(
+                        shot: _shots[index],
+                        baseScale: scale,
+                        onTap: () =>
+                            _showDesignZoomDialog(context, _shots[index]),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 12),
-        Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(
-              _shots.length,
-              (i) {
-                final isActive = (_page.round() == i);
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  height: 6,
-                  width: isActive ? 20 : 8,
-                  decoration: BoxDecoration(
-                    color: isActive ? kSun : kParchment.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                );
-              },
-            ),
-          ),
+        const SizedBox(height: 10),
+        // dots
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(_shots.length, (i) {
+            final isActive = (_page.round() == i);
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              height: 6,
+              width: isActive ? 22 : 8,
+              decoration: BoxDecoration(
+                color: isActive ? kSun : kParchment.withOpacity(0.45),
+                borderRadius: BorderRadius.circular(999),
+              ),
+            );
+          }),
         ),
       ],
     );
@@ -2033,47 +2465,115 @@ class _DesignGallerySectionState extends State<_DesignGallerySection> {
 
 class _DesignShot {
   final String imageAsset;
+  final String? label;
 
   const _DesignShot({
     required this.imageAsset,
+    this.label,
   });
 }
 
-class _DesignCard extends StatelessWidget {
+class _DesignShotImage extends StatefulWidget {
   final _DesignShot shot;
-  const _DesignCard({required this.shot});
+  final double baseScale;
+  final VoidCallback? onTap;
+
+  const _DesignShotImage({
+    required this.shot,
+    this.baseScale = 1.0,
+    this.onTap,
+  });
+
+  @override
+  State<_DesignShotImage> createState() => _DesignShotImageState();
+}
+
+class _DesignShotImageState extends State<_DesignShotImage> {
+  bool _hovering = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // wider card
-      width: 520,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          // Glow effect around the image
-          BoxShadow(
-            color: kSun.withOpacity(0.6),
-            blurRadius: 36,
-            spreadRadius: 12,
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          color: kParchment, // subtle background behind the image
-          alignment: Alignment.center,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              // max height so tall images still fit nicely
-              maxHeight: 380,
+    final targetScale = widget.baseScale * (_hovering ? 1.06 : 1.0);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovering = true),
+      onExit: (_) => setState(() => _hovering = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedScale(
+          scale: targetScale,
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOut,
+          child: Container(
+            width: 520,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(26),
+              boxShadow: [
+                BoxShadow(
+                  color: kSun.withOpacity(_hovering ? 0.7 : 0.45),
+                  blurRadius: _hovering ? 42 : 30,
+                  spreadRadius: _hovering ? 20 : 14,
+                  offset: const Offset(0, 18),
+                ),
+              ],
             ),
-            child: Image.asset(
-              shot.imageAsset,
-              width: double.infinity,
-              fit: BoxFit.contain, // adjusts based on its own size / ratio
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                children: [
+                  // poster
+                  Positioned.fill(
+                    child: Container(
+                      color: kParchment,
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Image.asset(
+                          widget.shot.imageAsset,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // tiny label overlay
+                  if (widget.shot.label != null)
+                    Positioned(
+                      left: 12,
+                      bottom: 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.photo_library_rounded,
+                              size: 13,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              widget.shot.label!,
+                              style: GoogleFonts.nunito(
+                                fontSize: 11,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -2082,7 +2582,64 @@ class _DesignCard extends StatelessWidget {
   }
 }
 
-/* ───────────────────── CONTACT ───────────────────── */
+/// Full-screen zoom dialog for gallery designs
+void _showDesignZoomDialog(BuildContext context, _DesignShot shot) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.black.withOpacity(0.96),
+        insetPadding: const EdgeInsets.all(18),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      shot.label ?? 'Design preview',
+                      style: GoogleFonts.nunito(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: kParchment,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: kParchment),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: InteractiveViewer(
+                    minScale: 1,
+                    maxScale: 4,
+                    child: Center(
+                      child: Image.asset(
+                        shot.imageAsset,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+/* ───────────────────── CONTACT – (KEPT, BUT SLIGHTLY POLISHED) ───────────────────── */
 
 class _ContactSection extends StatelessWidget {
   const _ContactSection();
@@ -2090,54 +2647,123 @@ class _ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final year = DateTime.now().year;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionTitle(label: 'Contact', tagline: 'Let’s work together.'),
+        const _SectionTitle(
+          label: 'Contact',
+          tagline: 'Let’s collaborate on thoughtful interfaces.',
+        ),
         Container(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: kParchment,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: kSun.withOpacity(0.4)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'I’m open to UI/UX internship opportunities (on-site, hybrid, or remote).',
-                style: GoogleFonts.nunito(
-                  fontSize: 13,
-                  height: 1.6,
-                  color: kText,
-                ),
-              ),
-              const SizedBox(height: 14),
-              Wrap(
-                spacing: 10,
-                runSpacing: 8,
-                children: const [
-                  _ContactChip(
-                    icon: Icons.email,
-                    label: 'youremail@example.com',
-                  ),
-                  _ContactChip(
-                    icon: Icons.link,
-                    label: 'Behance / Dribbble / Portfolio link',
-                  ),
-                  _ContactChip(
-                    icon: Icons.location_on,
-                    label: 'Your City, Country',
-                  ),
-                ],
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                kSoftGreen,
+                kDeepGreen,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(22),
+            border: Border.all(color: kSun.withOpacity(0.5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 24,
+                offset: const Offset(0, 16),
               ),
             ],
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth > 720;
+              return Flex(
+                direction: isWide ? Axis.horizontal : Axis.vertical,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: isWide ? 3 : 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'I’m currently open to UI/UX internship roles (on-site and hybrid only).',
+                          style: GoogleFonts.nunito(
+                            fontSize: 13,
+                            height: 1.7,
+                            color: kParchment,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'If you are interested in offering me an internship opportunity, please email me. I am required to complete 500 hours of on-the-job training and will be available to start in February 2025.',
+                          style: GoogleFonts.nunito(
+                            fontSize: 12,
+                            height: 1.7,
+                            color: kParchment.withOpacity(0.85),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 8,
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                // TODO: hook to mailto: or contact form
+                              },
+                              icon: const Icon(Icons.mail_rounded, size: 18),
+                              label: const Text('Email me'),
+                            ),
+                            OutlinedButton.icon(
+                              onPressed: () {
+                                // TODO: hook to Behance / portfolio link
+                              },
+                              icon: const Icon(Icons.link_rounded, size: 18),
+                              label: const Text('View full portfolio'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (isWide) const SizedBox(width: 24) else const SizedBox(height: 18),
+                  Expanded(
+                    flex: isWide ? 2 : 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        _ContactMethodCard(
+                          icon: Icons.email_rounded,
+                          label: 'Email',
+                          value: 'paradero.marianne15@gmail.com',
+                        ),
+                        SizedBox(height: 8),
+                        _ContactMethodCard(
+                          icon: Icons.web_rounded,
+                          label: 'Portfolio / Case Studies',
+                          value: 'behance.com/your-handle',
+                        ),
+                        SizedBox(height: 8),
+                        _ContactMethodCard(
+                          icon: Icons.location_on_rounded,
+                          label: 'Location',
+                          value: 'Cavite, Philippines',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
         const SizedBox(height: 18),
         Center(
           child: Text(
-            '© $year Your Name • UI/UX & Front-end',
+            '© $year Marianne Rhaleigh G. Paradero • UI/UX & Front-end',
             style: GoogleFonts.nunito(
               fontSize: 11,
               color: kParchment.withOpacity(0.7),
@@ -2149,22 +2775,69 @@ class _ContactSection extends StatelessWidget {
   }
 }
 
-class _ContactChip extends StatelessWidget {
+class _ContactMethodCard extends StatelessWidget {
   final IconData icon;
   final String label;
-  const _ContactChip({required this.icon, required this.label});
+  final String value;
+
+  const _ContactMethodCard({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      avatar: Icon(icon, size: 16, color: kLeaf),
-      label: Text(label, style: const TextStyle(fontSize: 11)),
-      backgroundColor: kSoftGreen,
+    return HoverCard(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: kDeepGreen.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: kSun.withOpacity(0.35)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: kLeaf.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: Icon(icon, size: 18, color: kSun),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: GoogleFonts.nunito(
+                      fontSize: 11,
+                      color: kParchment.withOpacity(0.8),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  SelectableText(
+                    value,
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: kParchment,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-/* ───────────────────── HOVER CARD ───────────────────── */
+/* ───────────────────── HOVER CARD (SAME AS BEFORE) ───────────────────── */
 
 class HoverCard extends StatefulWidget {
   final Widget child;
