@@ -19,8 +19,8 @@ const Color kRose = Color(0xFFB4575E); // dusty ruby;
 
 // ───────────────────── LINKS / EXTERNAL URLS ─────────────────────
 
-const String kCvUrl =
-    'https://your-cv-link-here'; // TODO: replace with your actual CV URL
+// On web, this will open the bundled asset PDF at /assets/cv/paradero_cv.pdf
+const String kCvUrl = 'assets/cv/paradero_cv.pdf';
 const String kGithubProfileUrl = 'https://github.com/rhaleighp15';
 
 void main() {
@@ -648,235 +648,260 @@ class _HeroSectionState extends State<HeroSection>
                 ),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final isWide = widget.isWide && constraints.maxWidth > 900;
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // ─── LEFT TEXT COLUMN ───
-                        Expanded(
-                          flex: isWide ? 6 : 0,
-                          child: Column(
-                            crossAxisAlignment: isWide
-                                ? CrossAxisAlignment.start
-                                : CrossAxisAlignment.center,
-                            children: [
-                              ScrollFadeIn(
-                                delay: const Duration(milliseconds: 80),
-                                child: Text(
-                                  'UI / UX DESIGNER',
-                                  style: GoogleFonts.nunito(
-                                    fontSize: 13,
-                                    letterSpacing: 5,
-                                    fontWeight: FontWeight.w800,
-                                    color: kSun,
-                                  ),
-                                ),
+                    final bool isWide =
+                        widget.isWide && constraints.maxWidth > 900;
+
+                    // ─── TEXT COLUMN (shared) ───
+                    Widget buildTextColumn({required bool alignLeft}) {
+                      final crossAxis = alignLeft
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.center;
+                      final textAlign =
+                          alignLeft ? TextAlign.left : TextAlign.center;
+
+                      return Column(
+                        crossAxisAlignment: crossAxis,
+                        children: [
+                          ScrollFadeIn(
+                            delay: const Duration(milliseconds: 80),
+                            child: Text(
+                              'UI / UX DESIGNER',
+                              textAlign: textAlign,
+                              style: GoogleFonts.nunito(
+                                fontSize: 13,
+                                letterSpacing: 5,
+                                fontWeight: FontWeight.w800,
+                                color: kSun,
                               ),
-                              const SizedBox(height: 12),
-                              ScrollFadeIn(
-                                delay: const Duration(milliseconds: 140),
-                                child: Text(
-                                  'Hello — I’m Rhaleigh.',
-                                  textAlign: isWide
-                                      ? TextAlign.left
-                                      : TextAlign.center,
-                                  style: GoogleFonts.cormorantGaramond(
-                                    fontSize: isWide ? 72 : 46,
-                                    fontWeight: FontWeight.w800,
-                                    letterSpacing: 1.5,
-                                    color: kParchment,
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 24,
-                                        color: kSun.withOpacity(0.95),
-                                        offset: const Offset(0, 8),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              ScrollFadeIn(
-                                delay: const Duration(milliseconds: 200),
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 720,
-                                  ),
-                                  child: Text(
-                                    'I’m a 4th year IT student who loves UI/UX design and frontend development —'
-                                    ' still learning, but excited to contribute, grow with a team, and support real projects through an internship opportunity.',
-                                    textAlign: isWide
-                                        ? TextAlign.left
-                                        : TextAlign.center,
-                                    style: GoogleFonts.nunito(
-                                      fontSize: 16,
-                                      height: 1.8,
-                                      color: kParchment.withOpacity(0.92),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              ScrollFadeIn(
-                                delay: const Duration(milliseconds: 280),
-                                child: Wrap(
-                                  spacing: 12,
-                                  runSpacing: 12,
-                                  children: [
-                                    ElevatedButton.icon(
-                                      onPressed: widget.onViewProjects,
-                                      icon: const Icon(
-                                        Icons.grid_view_rounded,
-                                      ),
-                                      label: const Text(
-                                        'View Academic Projects',
-                                      ),
-                                    ),
-                                    OutlinedButton.icon(
-                                      onPressed: widget.onDownloadCv,
-                                      icon: const Icon(Icons.description),
-                                      label: const Text('Download CV'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 18),
-                              ScrollFadeIn(
-                                delay: const Duration(milliseconds: 340),
-                                child: Wrap(
-                                  spacing: 8,
-                                  children: const [
-                                    _HeroTag(label: 'UI/UX Design'),
-                                    _HeroTag(label: 'Frontend Development'),
-                                    _HeroTag(label: 'Design Systems'),
-                                    _HeroTag(label: 'Prototyping'),
-                                    _HeroTag(label: 'Internship-ready'),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-
-                        if (isWide) const SizedBox(width: 32),
-
-                        // ─── RIGHT ILLUSTRATION COLUMN ───
-                        if (isWide)
-                          Expanded(
-                            flex: 4,
-                            child: SizedBox(
-                              height: 420, // more vertical room
-                              child: Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  // glowing sun
-                                  Positioned(
-                                    top: 40 + movement * 0.3,
-                                    right: 40,
-                                    child: Container(
-                                      width: 140,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: kSun,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: kSun.withOpacity(0.7),
-                                            blurRadius: 60,
-                                            spreadRadius: 18,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                  // floating charms
-                                  _FloatingCharmPainted(
-                                    left: -6,
-                                    top: 26 + math.sin(charmPhase) * 8,
-                                    icon: Icons.star,
-                                    size: 18,
-                                    color: kSun,
-                                    opacityBase: 0.9,
-                                  ),
-                                  _FloatingCharmPainted(
-                                    right: 12,
-                                    top: 100 + math.cos(charmPhase * 1.3) * 10,
-                                    icon: Icons.circle,
-                                    size: 12,
-                                    color: kTeal,
-                                    opacityBase: 0.85,
-                                  ),
-                                  _FloatingCharmPainted(
-                                    left: 40,
-                                    bottom: -8 + movement * 0.35,
-                                    icon: Icons.diamond,
-                                    size: 20,
-                                    color: kRose,
-                                    opacityBase: 0.92,
-                                  ),
-                                  _FloatingCharmPainted(
-                                    right: -12,
-                                    bottom:
-                                        20 + math.sin(charmPhase * 0.7) * 12,
-                                    icon: Icons.circle,
-                                    size: 14,
-                                    color: kLeaf,
-                                    opacityBase: 0.9,
-                                  ),
-
-                                  // your illustration (clickable)
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Transform.translate(
-                                      offset: Offset(0, movement * 0.4),
-                                      child: MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                // uses your existing zoom dialog helper
-                                                _showZoomImageDialog(
-                                                  context,
-                                                  'assets/profile/rhaleigh.png',
-                                                  caption:
-                                                      'Marianne Rhaleigh G. Paradero',
-                                                );
-                                              },
-                                              child: SizedBox(
-                                                height:
-                                                    390, // controls drawing.png size
-                                                child: Image.asset(
-                                                  'assets/profile/drawing.png',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 12),
-                                            Text(
-                                              'Marianne Rhaleigh G. Paradero',
-                                              style: GoogleFonts.nunito(
-                                                fontSize: 12,
-                                                color: kParchment.withOpacity(
-                                                  0.75,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                          const SizedBox(height: 12),
+                          ScrollFadeIn(
+                            delay: const Duration(milliseconds: 140),
+                            child: Text(
+                              'Hello — I’m Rhaleigh.',
+                              textAlign: textAlign,
+                              style: GoogleFonts.cormorantGaramond(
+                                fontSize: isWide ? 72 : 46,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1.5,
+                                color: kParchment,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 24,
+                                    color: kSun.withOpacity(0.95),
+                                    offset: const Offset(0, 8),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                      ],
-                    );
+                          const SizedBox(height: 8),
+                          ScrollFadeIn(
+                            delay: const Duration(milliseconds: 200),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: 720,
+                              ),
+                              child: Text(
+                                'I’m a 4th year IT student who loves UI/UX design and frontend development —'
+                                ' still learning, but excited to contribute, grow with a team, and support real projects through an internship opportunity.',
+                                textAlign: textAlign,
+                                style: GoogleFonts.nunito(
+                                  fontSize: 16,
+                                  height: 1.8,
+                                  color: kParchment.withOpacity(0.92),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          ScrollFadeIn(
+                            delay: const Duration(milliseconds: 280),
+                            child: Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
+                              alignment: alignLeft
+                                  ? WrapAlignment.start
+                                  : WrapAlignment.center,
+                              children: [
+                                ElevatedButton.icon(
+                                  onPressed: widget.onViewProjects,
+                                  icon: const Icon(
+                                    Icons.grid_view_rounded,
+                                  ),
+                                  label: const Text(
+                                    'View Academic Projects',
+                                  ),
+                                ),
+                                OutlinedButton.icon(
+                                  onPressed: widget.onDownloadCv,
+                                  icon: const Icon(Icons.description),
+                                  label: const Text('Download CV'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          ScrollFadeIn(
+                            delay: const Duration(milliseconds: 340),
+                            child: Wrap(
+                              spacing: 8,
+                              alignment: alignLeft
+                                  ? WrapAlignment.start
+                                  : WrapAlignment.center,
+                              children: const [
+                                _HeroTag(label: 'UI/UX Design'),
+                                _HeroTag(label: 'Frontend Development'),
+                                _HeroTag(label: 'Design Systems'),
+                                _HeroTag(label: 'Prototyping'),
+                                _HeroTag(label: 'Internship-ready'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+
+                    // ─── ILLUSTRATION (shared) ───
+                    Widget buildIllustration({required double height}) {
+                      return SizedBox(
+                        height: height,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            // glowing sun
+                            Positioned(
+                              top: 40 + movement * 0.3,
+                              right: 40,
+                              child: Container(
+                                width: 140,
+                                height: 140,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: kSun,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: kSun.withOpacity(0.7),
+                                      blurRadius: 60,
+                                      spreadRadius: 18,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            // floating charms
+                            _FloatingCharmPainted(
+                              left: -6,
+                              top: 26 + math.sin(charmPhase) * 8,
+                              icon: Icons.star,
+                              size: 18,
+                              color: kSun,
+                              opacityBase: 0.9,
+                            ),
+                            _FloatingCharmPainted(
+                              right: 12,
+                              top: 100 + math.cos(charmPhase * 1.3) * 10,
+                              icon: Icons.circle,
+                              size: 12,
+                              color: kTeal,
+                              opacityBase: 0.85,
+                            ),
+                            _FloatingCharmPainted(
+                              left: 40,
+                              bottom: -8 + movement * 0.35,
+                              icon: Icons.diamond,
+                              size: 20,
+                              color: kRose,
+                              opacityBase: 0.92,
+                            ),
+                            _FloatingCharmPainted(
+                              right: -12,
+                              bottom: 20 + math.sin(charmPhase * 0.7) * 12,
+                              icon: Icons.circle,
+                              size: 14,
+                              color: kLeaf,
+                              opacityBase: 0.9,
+                            ),
+
+                            // illustration (clickable)
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Transform.translate(
+                                offset: Offset(0, movement * 0.4),
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showZoomImageDialog(
+                                            context,
+                                            'assets/profile/rhaleigh.png',
+                                            caption:
+                                                'Marianne Rhaleigh G. Paradero',
+                                          );
+                                        },
+                                        child: SizedBox(
+                                          height: height - 30,
+                                          child: Image.asset(
+                                            'assets/profile/drawing.png',
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        'Marianne Rhaleigh G. Paradero',
+                                        style: GoogleFonts.nunito(
+                                          fontSize: 12,
+                                          color: kParchment.withOpacity(
+                                            0.75,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    // ─── LAYOUT SWITCH ───
+                    if (isWide) {
+                      // Desktop / large screens: Row
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: buildTextColumn(alignLeft: true),
+                          ),
+                          const SizedBox(width: 32),
+                          Expanded(
+                            flex: 4,
+                            child: buildIllustration(height: 420),
+                          ),
+                        ],
+                      );
+                    } else {
+                      // Mobile / narrow: Column
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          buildTextColumn(alignLeft: false),
+                          const SizedBox(height: 28),
+                          buildIllustration(height: 320),
+                        ],
+                      );
+                    }
                   },
                 ),
               );
@@ -1190,7 +1215,7 @@ class _ProjectsSection extends StatelessWidget {
         tags: ['Web app', 'Tracking', 'LPU-Cavite', 'Permit System'],
         role: 'UI/UX Designer • Front-end Support',
         timeframe: '2024 • Academic project',
-        caseStudyUrl: 'https://example.com/epass',
+        caseStudyUrl: null,
         gallery: [
           'assets/epass/epass_1.png',
           'assets/epass/epass_2.png',
@@ -1593,7 +1618,7 @@ void _showProjectGalleryDialog(BuildContext context, ProjectCardData data) {
                         child: TextButton.icon(
                           onPressed: () => openLink(data.caseStudyUrl!),
                           icon: const Icon(Icons.open_in_new, size: 16),
-                          label: const Text('Open live site / case study'),
+                          label: const Text('Open Live Site'),
                         ),
                       ),
                       const SizedBox(height: 4),
